@@ -1,5 +1,6 @@
 package classes;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ public class Main {
 	private static final String Clientes = null;
 	private static EntityManager entity;
 	private static List<Clientes> listaClientes = new ArrayList<>();
+	private static List<Pecas> listaPecas = new ArrayList<>();
 	static Scanner sc = new Scanner(System.in);
 	
 	
@@ -39,6 +41,7 @@ public class Main {
 			int opcao = sc.nextInt();
 			
 			if (opcao==1) {
+				limparConsole();
 				
 				System.out.println("1 - Cadastrar cliente");
 				
@@ -66,6 +69,7 @@ public class Main {
 				}
 			}
 			if (opcao==2) {
+				limparConsole();
 				
 				System.out.println("1 - Cadastrar Peças");
 				
@@ -96,7 +100,11 @@ public class Main {
 		}
 	}
 	
-
+//*****************************************LimparConsole*************************************
+	
+	private static void limparConsole() {
+	    for (int i = 0; i < 50; ++i) System.out.println();
+	}
 
 	//*********************Cadastro_de_CLientes********************
 
@@ -123,9 +131,11 @@ public class Main {
 		listaClientes.add(clientex);
 		
 		entity.persist(clientex);
+		 
+		System.out.println("Cliente cadastrado com sucesso!");
 		
 		entity.getTransaction().commit();
-	    System.out.println("Cliente cadastrado com sucesso!");
+	   
 	    }
 	
 	 //***************************Remover_Cliente********************************
@@ -171,10 +181,6 @@ public class Main {
 	        
 	         Clientes clientesnovo = new Clientes(buscarcpf, novoNome, novoEndereco, novoTelefone);
 	        
-	        		 
-	        		 
-	        // Atualiza_os_dados_do_cliente
-	        
 	        clientex.setNome(novoNome);
 	        clientex.setEndereco(novoEndereco);
 	        clientex.setTelefone(novoTelefone);
@@ -189,26 +195,66 @@ public class Main {
 	        
 	    	}
 		}
-	//***********************************Peças****************************************
+	//***********************************Pecas****************************************
 	
 	private static void cadastrarPeças(EntityManager entity2) {
 		
 		entity.getTransaction().begin();
+		Pecas pecasx = new Pecas ();
 		
+		System.out.println("Digite a identificação do produto: ");
+		String Id = sc.next();
+		pecasx.setId(Id);
 		
+		System.out.println("Qual vai ser o estilo da roda no produto: ");
+		String rodas = sc.next();
+		pecasx.setRodas(rodas);
+		
+		System.out.println("Qual vai ser o estilo do truks no produto: ");
+		String truks = sc.next();
+		pecasx.setTruks(truks);
+		
+		System.out.println("Qual vai ser o estilo do shape no produto: ");
+		String shapes = sc.next();
+		pecasx.setShapes(shapes);
+		
+		System.out.println("Digite o valor do produto: ");
+		String Preco = sc.next();
+		pecasx.setPreco(Preco);
+		
+		Pecas pecas = new Pecas (Id ,rodas , truks, shapes, Preco);
+		
+		entity.persist(pecasx);
+		
+		System.out.println("Peca cadastrada com sucesso!");
+	   
 		entity.getTransaction().commit();
+	     }
 		
-		}
-	//**************************************RemoverPeças*******************************
+	//**************************************RemoverPecas*******************************
 	private static void removerPecas(EntityManager entity2) {
 		
 		entity.getTransaction().begin();
 		
-		
-		entity.getTransaction().commit();
-		
+	    System.out.println("Digite a Identificação da peça que deseja remover:");
+	    String IdPecas = sc.next();
+	    
+	    Pecas pecasARemover = entity.find(Pecas.class, IdPecas);
+	    if (pecasARemover != null) {
+	    	
+	        entity.remove(pecasARemover);
+	        
+	        entity.getTransaction().commit();
+	        
+	        System.out.println("Peca removida com sucesso!");
+	    } 
+	    
+	    else { System.out.println("Peca não encontrada ou ID inválido.");
+	        
+	        entity.getTransaction().rollback();
+	      }  
 	}
-	//***************************************AtualizarPeças****************************
+	//***************************************AtualizarPecas****************************
 	private static void atualizarPecas(EntityManager entity2) {
 		
 		entity.getTransaction().begin();
@@ -218,11 +264,3 @@ public class Main {
 	}
 	
 	}
-	
-	
-	
-	
-	
-  
-
-	
