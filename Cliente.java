@@ -3,19 +3,26 @@ package classes;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Clientes {
 
+	
 	@Column (name= "nome_cli")
-	String nome; 
+	private String nome; 
 	@Id 
 	@Column(name= "cpf_cli" ,unique = true, nullable = false)
-	String cpf;
+	private String cpf;
 	@Column (name= "endereco_cli")
-	String endereco;
+	private String endereco;
 	@Column  (name= "telefone_cli" , nullable = false)
-	String telefone;
+	private String telefone;
+	@ManyToOne
+	private Pecas pecas;
+	
+	
 	
 	public Clientes(String nome, String cpf, String endereco, String telefone) {
 		super();
@@ -37,7 +44,7 @@ public class Clientes {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -45,6 +52,7 @@ public class Clientes {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -60,5 +68,16 @@ public class Clientes {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public Pecas getPecas() {
+		return pecas;
+	}
+
+	public void setPecas(Pecas pecas) {
+		this.pecas = pecas;
+	}
+
+	
 	
 }
+
