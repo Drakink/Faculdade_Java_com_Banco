@@ -1,84 +1,106 @@
 package classes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Pecas {
 
 	@Id
 	@Column(name= "id_skate")
-	String Id;
+	private String Id;
 	@Column (name= "rodas_skate")
-	String Rodas;
+	private String Rodas;
 	@Column (name= "shapes_skate")
-	String Shapes;
+	private String Shapes;
 	@Column (name= "truck_skate")
-	String Truks;
-	@Column (name= "modelo_skate")
-	String Modelos;
+	private String Truks;
 	@Column (name="preco_skate")
-	Double Preco;
+	private String Preco;
+	@OneToMany
+	@JoinColumn (name = "cpf_cli")
+	private List<Clientes> clientes;
 	
-	public Pecas(String id, String rodas, String shapes, String truks, String modelos, Double preco) {
+	
+	public Pecas(String id, String rodas, String shapes, String truks, String preco) {
 		super();
-		Id = id;
-		Rodas = rodas;
-		Shapes = shapes;
-		Truks = truks;
-		Modelos = modelos;
-		Preco = preco;
+		this.Id = id;
+		this.Rodas = rodas;
+		this.Shapes = shapes;
+		this.Truks = truks;
+		this.Preco = preco;
 		
 	}
 
-	public String getIdentificacao() {
+
+	public Pecas() {
+		super();
+	}
+	
+	public String getId() {
 		return Id;
 	}
 
-	public void setIdentificacao(String identificacao) {
-		Id = identificacao;
+
+	public void setId(String id) {
+		Id = id;
 	}
+
 
 	public String getRodas() {
 		return Rodas;
 	}
 
+
 	public void setRodas(String rodas) {
 		Rodas = rodas;
 	}
+
 
 	public String getShapes() {
 		return Shapes;
 	}
 
+
 	public void setShapes(String shapes) {
 		Shapes = shapes;
 	}
+
 
 	public String getTruks() {
 		return Truks;
 	}
 
+
 	public void setTruks(String truks) {
 		Truks = truks;
 	}
 
-	public String getModelos() {
-		return Modelos;
-	}
 
-	public void setModelos(String modelos) {
-		Modelos = modelos;
-	}
-
-	public Double getPreco() {
+	public String getPreco() {
 		return Preco;
 	}
 
-	public void setPreco(Double preco) {
+
+	public void setPreco(String preco) {
 		Preco = preco;
 	}
-	
+
+
+	public List<Clientes> getClientes() {
+		return clientes;
+	}
+
+
+	public void setClientes(List<Clientes> clientes) {
+		this.clientes = clientes;
+	}
+
 	
 }
