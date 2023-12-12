@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+     <persistence-unit name="PersistenceUnitJPA">
+
+        <description> arquivo de persistencia JPA </description>
+
+        <!-- Implementacao do JPA -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!--  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+        <class>classes.Clientes</class>
+        <class>classes.Pecas</class>
+        <class>classes.Fornecedores</class>
+        <class>classes.Funcionarios</class>
+        
+        
+		
+        <properties>
+            <!-- Configuracoes do banco de dados -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/Skates" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="admin" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+
+            <!-- Configuracoes do Hibernate-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="false" />
+            <property name="hibernate.hbm2ddl.auto" value="validate" />  <!-- Possible values for hibernate.hbm2ddl.auto are: validate, update, create, create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			
+            <!-- Configuracoes do EclipseLink (os parametros so sao reconhecidos se estiver usando a implementacao do EclipseLink) -->
+<!--            <property name="eclipselink.target-database" value="MySQL"/>-->
+<!--            <property name="eclipselink.logging.level.sql" value="FINE" />-->
+<!--            <property name="eclipselink.logging.parameters" value="true" />-->
+<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />-->
+        </properties>
+    </persistence-unit>
+</persistence>
